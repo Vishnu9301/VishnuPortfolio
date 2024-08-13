@@ -57,16 +57,46 @@ body {
       .italic {
         font-style: italic;
       }
+      .tf-social {
+        width: 1em;
+        height: 1em;
+        fill: black; /* Ensure the icons are black */
+}
     </style>
   </head>
-
-<body>
-
+  <body>
+    
+<!-- Header of the page -->
 <header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
   <div class="container-fluid">
+    <!-- Vishnu Venugopal on the left -->
     <a class="navbar-brand" href="index.html">Vishnu Venugopal</a>
+
+<!-- Center the contact information -->
+        <!-- Setting up contact info on HEADER--> 
+   <div class="d-flex flex-grow-1 justify-content-center">
+      <p class="contact-info" style="display: inline-flex; justify-content: center; align-items: center; font-size: 1em; margin: 0;">
+        <!-- Email Link and Icon -->
+        <svg class="tf-social">
+          <use xlink:href="#envelope"/>
+        </svg>
+        <a href="mailto:vishnu.jake93@gmail.com" target="_blank">vishnu.jake93@gmail.com</a>
+        <span style="margin: 0 10px;">|</span>
+
+        <!-- Linkedin Link and Icon -->
+        <svg class="tf-social">
+          <use xlink:href="#linkedin"/>
+        </svg>
+        <a href="https://www.linkedin.com/in/vishnu-venugopal93/" target="_blank">LinkedIn Profile</a>
+        <span style="margin: 0 10px;">|</span>
+
+      </p>
+    </div>
+
+    <!-- Projects and Resume on the right -->
     <div class="ms-auto">
       <ul class="navbar-nav mb-2 mb-lg-0">
+        
         <!-- Dropdown for Projects -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -77,16 +107,23 @@ body {
             <li><a class="dropdown-item" href="amazon-music-promotion-project.html">Optimization of Amazon Music Subscription Promotion Spare Claim Codes</a></li>
           </ul>
         </li>
+        
+        <!-- Resume Link -->
+        <li class="nav-item">
           <a class="nav-link" href="index.html#resume">Resume</a>
-        </ul>
-      </div>
+        </li>
+      </ul>
     </div>
-  </header>
-    
+  </div>
+</header>
+
+    <!-- Project heading section -->
     <div class="container">
     <div class="row">
       <div class="col">
           <h1 class="display-4 text-center">Optimization of Amazon Music Subscription Promotion Spare Claim Codes</h1>
+    
+    <!-- Project title and duration section -->
             <div class="summary">
             <p><span class="highlight">Project Title:</span> Optimization of Amazon Music Subscription Promotion Spare Claim Codes</p>
             <p><span class="highlight">Duration:</span> 2022 - 2023</p>
@@ -94,7 +131,7 @@ body {
          </div>
     </div>
 
-        
+     <!-- Executive Summary -->    
     <div class="row mt-4">
       <div class="col">
         <h2 class="underline">Executive Summary</h2>
@@ -102,16 +139,23 @@ body {
 
         <div class="section-divider"></div>
 
+        <!-- Project Overview -->  
         <h2 class="underline">Project Overview</h2>
+
+        <!-- Project Overview Subsection 1-->  
         <h4>Situation:</h4>
         <p>In early 2022, it was identified that the existing system for managing Amazon Music Subscription Promotion codes, which was divided between the EU and NA regions, was leading to significant financial losses due to underutilization. The old codes were unlimited in count, complicating management and tracking.</p>
 
+         <!-- Project Overview Subsection 2--> 
         <h4>Task:</h4>
         <p>The project involved revoking access to the old codes, acquiring a new set of global claim codes, and implementing a streamlined system to enhance the utilization and effectiveness of these codes. The success of this initiative was measured through a comprehensive review at the end of 2023.</p>
 
         <div class="section-divider"></div>
 
+         <!-- Project Charter --> 
         <h2 class="underline">Project Charter</h2>
+
+          <!-- Project Charter Subsection 1-->
         <h4>Objectives:</h4>
         <ul>
             <li>Reduce financial losses from unused promotion codes by over 75% by the end of 2023.</li>
@@ -120,6 +164,7 @@ body {
             <li>Enhance customer experience and satisfaction by reducing error rates in code distribution.</li>
         </ul>
 
+          <!-- Project Charter Subsection 2-->
         <h4>Scope:</h4>
         <ul>
             <li>Revoke old EU and NA codes by mid-2022.</li>
@@ -129,6 +174,7 @@ body {
             <li>Continuous monitoring and quality control throughout 2023.</li>
         </ul>
 
+          <!-- Project Charter Subsection 3-->
         <h4>Key Deliverables:</h4>
         <ul>
             <li>New global claim codes fully operational by Q3 2022.</li>
@@ -139,7 +185,10 @@ body {
 
         <div class="section-divider"></div>
 
+          <!-- Stakeholder Analysis -->
         <h2 class="underline">Stakeholder Analysis</h2>
+
+          <!-- Stakeholder Analysis Subsection 1-->
         <h4>Key Stakeholders:</h4>
         <ul>
             <li><b>Amazon Music Global Promotion Team:</b> Led the acquisition and global distribution strategy of the new codes.</li>
@@ -148,6 +197,7 @@ body {
             <li><b>Finance Team:</b> Oversaw the cost-benefit analysis and financial impact assessment throughout 2022 and 2023.</li>
         </ul>
 
+          <!-- Stakeholder Analysis Subsection 2 -->
         <h4>Stakeholder Management:</h4>
         <ul>
             <li>Held regular bi-weekly meetings with the Amazon Music Global Promotion Team to ensure project alignment.</li>
@@ -157,62 +207,86 @@ body {
 
         <div class="section-divider"></div>
 
+        <!-- Project Plan -->
         <h2 class="underline">Project Plan</h2>
+
+          <!-- Project Plan Subsection 1 -->
         <h4>Revocation of Old Codes:</h4>
         <p>Analyzed the financial impact of the old codes in early 2022, identifying a $158,024.74 loss due to underutilization. Successfully revoked access to the outdated codes by mid-2022 and communicated the changes to the CS team.</p>
 
+          <!-- Project Plan Subsection 2 -->
         <h4>Acquisition of New Codes:</h4>
         <p>Collaborated with the Amazon Music Global Promotion Team to acquire a new, limited set of global codes aligned with current business needs by Q3 2022.</p>
 
+          <!-- Project Plan Subsection 3 -->
         <h4>Development and Implementation of SOP:</h4>
         <p>Developed a new SOP by Q4 2022, including stringent customer validation and fraud checks before issuing codes. Implemented the SOP and trained the CS team by Q1 2023.</p>
 
+          <!-- Project Plan Subsection 4 -->
         <h4>Training and Quality Control:</h4>
         <p>Conducted comprehensive training sessions for the CS team in Q1 2023. Established quality control mechanisms by Q2 2023 to continuously monitor code utilization and ensure SOP compliance.</p>
 
         <div class="section-divider"></div>
 
+          <!-- Test Launch Findings -->
         <h2 class="underline">Test Launch Findings</h2>
+
+          <!-- Test Launch Findings Subsection 1 -->
         <h4>Initial Observations:</h4>
         <p>During the test launch in early 2023, challenges in code validation were identified, leading to slight delays in customer interactions. Feedback from the CS team highlighted areas for SOP improvement, particularly in handling edge cases.</p>
 
+          <!-- Test Launch Findings Subsection 2 -->
         <h4>Adjustments Made:</h4>
         <p>Enhanced the validation process in Q2 2023 to address the identified challenges. Updated the SOP based on feedback and conducted additional training sessions to address gaps.</p>
 
+          <!-- Test Launch Findings Subsection 3 -->
         <h4>Results:</h4>
         <p>Improved customer response times and code utilization during the test phase. Positive feedback from customers regarding the streamlined process.</p>
 
         <div class="section-divider"></div>
 
+          <!-- Retrospective and Impact -->
         <h2 class="underline">Retrospective and Impact</h2>
+
+          <!-- Retrospective and Impact Subsection 1 -->
         <h4>Cost Savings:</h4>
         <p>By the end of 2023, the project resulted in significant cost savings, reducing the value of unused codes from $158,024.74 in 2022 to $34,927.57, leading to net savings of $123,097.17.</p>
 
+          <!-- Retrospective and Impact Subsection 2 -->
         <h4>Improved Utilization:</h4>
         <p>Utilization of the new global codes increased by 50%, with 6.62% of the codes used within the first quarter of 2023, compared to lower utilization rates of the old system.</p>
 
+          <!-- Retrospective and Impact Subsection 3 -->
         <h4>Enhanced Efficiency:</h4>
         <p>The new SOP ensured that only eligible customers received codes, reducing the risk of fraud and increasing overall efficiency by 30% compared to the previous system.</p>
 
+          <!-- Retrospective and Impact Subsection 4 -->
         <h4>Customer Experience:</h4>
         <p>Customer feedback at the end of 2023 indicated a better experience due to faster response times and more reliable code distribution.</p>
 
+          <!-- Retrospective and Impact Subsection 5 -->
         <h4>ROI:</h4>
         <p>The initial year ROI in 2023 was approximately 168.29%, with subsequent years expected to yield an ROI of over 1018.16%, demonstrating the long-term financial benefits of the project.</p>
 
         <div class="section-divider"></div>
 
+          <!-- Future Considerations -->
         <h2 class="underline">Future Considerations</h2>
+
+          <!-- Future Considerations Subsection 1 -->
         <h4>Scalability:</h4>
         <p>The system is scalable, with plans to expand as the volume of codes increases in the coming years.</p>
 
+          <!-- Future Considerations Subsection 2 -->
         <h4>Long-Term System Upgrades:</h4>
         <p>Potential system upgrades will be considered every few years to maintain efficiency and security.</p>
 
+          <!-- Future Considerations Subsection 3 -->
         <h4>Compliance and Security:</h4>
         <p>Ongoing compliance with security and data protection standards will be ensured through periodic audits and updates.</p>
  </div>
 
+              <!-- Footer of the page -->
     <footer class="navbar navbar-expand navbar-light bg-light bg-gradient border-top mt-5">
     <div class="container-fluid">
       <div class="ms-auto">
@@ -223,8 +297,32 @@ body {
     </div>
   </footer>
 
+    <!-- Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
+    <!-- Icons -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    
+    <!-- Envelope Icon -->
+    <symbol id="envelope" viewBox="0 0 16 16">
+      <path fill="black" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm14-.5H2a.5.5 0 0 0-.5.5v.217l6.5 3.9 6.5-3.9V4a.5.5 0 0 0-.5-.5zm.5 1.541L8.356 9.75a.5.5 0 0 1-.712 0L1 5.041V12a.5.5 0 0 0 .5.5h12a.5.5 0 0 0 .5-.5V5.041z"/>
+    </symbol>
+    
+    <!-- LinkedIn Icon -->
+    <symbol id="linkedin" viewBox="0 0 16 16">
+      <path fill="black" d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+    </symbol>
+    
+    <!-- Phone Icon -->
+    <symbol id="phone" viewBox="0 0 16 16">
+      <path fill="black" d="M3.654 1.328a1.75 1.75 0 0 1 2.884-.163l1.857 2.318a1.75 1.75 0 0 1-.263 2.4l-.637.637a.25.25 0 0 0-.057.195c.067.522.248 1.05.541 1.574.294.523.623.994 1.003 1.364.385.374.867.676 1.377.867.052.02.107.034.162.048a.25.25 0 0 0 .206-.058l.637-.637a1.75 1.75 0 0 1 2.4-.263l2.318 1.857a1.75 1.75 0 0 1-.163 2.884l-1.754 1.169a3.25 3.25 0 0 1-3.214.291c-.72-.352-1.4-.761-2.044-1.229a32.634 32.634 0 0 1-5.078-5.078 32.634 32.634 0 0 1-1.228-2.044 3.25 3.25 0 0 1 .29-3.214l1.17-1.754z"/>
+    </symbol>
+    
+    <!-- Location Icon -->
+    <symbol id="location" viewBox="0 0 16 16">
+      <path fill="black" d="M8 16s6-5.686 6-10A6 6 0 1 0 2 6c0 4.314 6 10 6 10zm0-8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
+    </symbol>
+</svg>
     
 </body>
 
