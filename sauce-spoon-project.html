@@ -37,13 +37,21 @@
   </head>
   <body>
 
-  <header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">Vishnu Venugopal</a>
-      <div class="ms-auto">
-        <ul class="navbar-nav mb-2 mb-lg-0">
-          <a class="nav-link" href="index.html#projects">Projects</a>
-          <a class="nav-link" href="index.html#essays">Essays</a>
+<header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">Vishnu Venugopal</a>
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <!-- Dropdown for Projects -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Projects
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="projectsDropdown">
+            <li><a class="dropdown-item" href="sauce-spoon-project.html">Sauce & Spoon Capstone Project</a></li>
+            <li><a class="dropdown-item" href="amazon-music-promotion-project.html">Optimization of Amazon Music Subscription Promotion Spare Claim Codes</a></li>
+          </ul>
+        </li>
           <a class="nav-link" href="index.html#resume">Resume</a>
         </ul>
       </div>
