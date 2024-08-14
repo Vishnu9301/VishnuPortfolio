@@ -9,20 +9,35 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Sauce & Spoon Capstone Project | Vishnu Venugopal</title>
     <style>
-      body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f8f9fa;
-            color: #343a40;
-            padding: 20px;
-            padding-top: 70px; /* Adjust this to avoid content overlap */
-      }
-      header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-      }      
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f8f9fa;
+      color: #343a40;
+      margin: 0;
+      padding-top: 4px; /* Adjust this to avoid content overlap */
+    }
+    /* Style the header */
+    .header {
+      padding: 10px 16px;
+      background: #f8f9fa; /* Same background color as before */
+      color: #343a40;
+      z-index: 1000;
+      width: 100%;
+    }
+
+    /* The sticky class is added to the header with JS when it reaches its scroll position */
+    .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    /* Add some top padding to the page content to prevent sudden quick movement */
+    .sticky + .content {
+      padding-top: 102px;
+    }
       .container {
             margin-top: 50px;
          /* max-width: 900px; */
@@ -241,6 +256,26 @@
       <path fill="black" d="M8 16s6-5.686 6-10A6 6 0 1 0 2 6c0 4.314 6 10 6 10zm0-8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
     </symbol>
 </svg>
+
+        <script>
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function() {myFunction()};
+
+    // Get the header
+    var header = document.getElementById("myHeader");
+
+    // Get the offset position of the navbar
+    var sticky = header.offsetTop;
+
+    // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
+  </script>
     
   </body>
 </html>
