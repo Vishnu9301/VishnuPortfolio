@@ -1,116 +1,93 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Resume | Vishnu Venugopal | Professional Portfolio">
-    <meta name="description" content="">
-    <meta name="image" content="">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Vishnu Venugopal | Professional Portfolio">
-    <meta property="og:url" content="">
-    <meta property="og:title" content="Resume | Vishnu Venugopal | Professional Portfolio">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="">
-    <link rel="shortcut icon" href="">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-    <title>Resume | Vishnu Venugopal | Professional Portfolio</title>
-    <style>
-      body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f8f9fa;
-            color: #343a40;
-            padding-top: 70px; /* Adjust this to match header height */
-            margin: 0;
-      }
-      header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        background-color: #f8f9fa; /* Ensure the header has a solid background color */
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow for distinction */
-        padding: 10px 20px; /* Adjust padding for desired header size */
-      }
-      .container {
-        margin-top: 50px;
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      }
-      .navbar-brand {
-        font-weight: bold;
-      }
-      .tf-social {
-        width: 18px;
-        height: 18px;
-        margin-right: 8px;
-        fill: #007bff;
-      }
-      .contact-info {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-      .contact-info svg {
-        width: 18px;
-        height: 18px;
-        margin-right: 10px;
-      }
-      .underline {
-        text-decoration: underline;
-        font-weight: bold;
-      }
-      .bold {
-        font-weight: bold;
-      }
-      .italic {
-        font-style: italic;
-      }
-    </style>
-  </head>
-  <body>
-  
-  <!-- Header of the page -->
-<header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">Vishnu Venugopal</a>
-    <div class="ms-auto">
-      <ul class="navbar-nav mb-2 mb-lg-0">
-        
-        <!-- Dropdown for Projects -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Projects
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="projectsDropdown">
-            <li><a class="dropdown-item" href="amazon-music-promotion-project.html">Optimization of Amazon Music Subscription Promotion Spare Claim Codes</a></li>
-            <li><a class="dropdown-item" href="sauce-spoon-project.html">Sauce & Spoon Capstone Project</a></li>
-          </ul>
-        </li>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="Resume | Vishnu Venugopal | Professional Portfolio">
+  <meta name="description" content="">
+  <meta name="image" content="">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Vishnu Venugopal | Professional Portfolio">
+  <meta property="og:url" content="">
+  <meta property="og:title" content="Resume | Vishnu Venugopal | Professional Portfolio">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="">
+  <link rel="shortcut icon" href="">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <title>Resume | Vishnu Venugopal | Professional Portfolio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f8f9fa;
+      color: #343a40;
+      margin: 0;
+      padding-top: 70px; /* Adjust this to avoid content overlap */
+    }
+    /* Style the header */
+    .header {
+      padding: 10px 16px;
+      background: #f8f9fa; /* Same background color as before */
+      color: #343a40;
+      z-index: 1000;
+      width: 100%;
+    }
 
-          <!-- Dropdown for Certificates -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="certificatesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Certificates
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="certificatesDropdown">
-            <li><a class="dropdown-item" href="google-project-management.html">Google Project Management: Professional Certificate</a></li>
-            <li><a class="dropdown-item" href="lean-six-sigma.html">Lean Six Sigma</a></li>
-            <li><a class="dropdown-item" href="asana-certification.html">ASANA</a></li>
+    /* The sticky class is added to the header with JS when it reaches its scroll position */
+    .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    /* Add some top padding to the page content to prevent sudden quick movement */
+    .sticky + .content {
+      padding-top: 102px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header of the page -->
+  <div class="header" id="myHeader">
+    <header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Vishnu Venugopal</a>
+        <div class="ms-auto">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+
+            <!-- Dropdown for Projects -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Projects
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="projectsDropdown">
+                <li><a class="dropdown-item" href="amazon-music-promotion-project.html">Optimization of Amazon Music Subscription Promotion Spare Claim Codes</a></li>
+                <li><a class="dropdown-item" href="sauce-spoon-project.html">Sauce & Spoon Capstone Project</a></li>
+              </ul>
+            </li>
+
+            <!-- Dropdown for Certificates -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="certificatesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Certificates
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="certificatesDropdown">
+                <li><a class="dropdown-item" href="google-project-management.html">Google Project Management: Professional Certificate</a></li>
+                <li><a class="dropdown-item" href="lean-six-sigma.html">Lean Six Sigma</a></li>
+                <li><a class="dropdown-item" href="asana-certification.html">ASANA</a></li>
+              </ul>
+            </li>
+
+            <!-- Resume Link -->
+            <a class="nav-link" href="index.html#resume">Resume</a>
           </ul>
-        </li>
-        
-        <!-- Resume Link -->
-          <a class="nav-link" href="index.html#resume">Resume</a>
-        </ul>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
+  </div>
 
 
 
@@ -271,6 +248,26 @@
       <path fill="black" d="M8 16s6-5.686 6-10A6 6 0 1 0 2 6c0 4.314 6 10 6 10zm0-8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
     </symbol>
 </svg>
+
+    <script>
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function() {myFunction()};
+
+    // Get the header
+    var header = document.getElementById("myHeader");
+
+    // Get the offset position of the navbar
+    var sticky = header.offsetTop;
+
+    // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
+  </script>
 
   </body>
 </html>
