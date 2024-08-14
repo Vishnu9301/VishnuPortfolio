@@ -10,10 +10,9 @@
     <title>Sauce & Spoon Capstone Project | Vishnu Venugopal</title>
     <style>
       html, body {
-        height: 100%; /* Ensures the body and html elements take up the full height of the viewport */
+        height: 100%; /* Ensure full height for scrolling */
         margin: 0;
         padding: 0;
-        overflow-x: hidden; /* Prevents horizontal scrolling */
       }
 
       body {
@@ -21,7 +20,7 @@
         line-height: 1.6;
         background-color: #f8f9fa;
         color: #343a40;
-        padding-top: 4px; /* Adjust this to avoid content overlap */
+        padding-top: 60px; /* Space for the fixed header */
       }
 
       /* Style the header */
@@ -31,19 +30,8 @@
         color: #343a40;
         z-index: 1000;
         width: 100%;
-      }
-
-      /* The sticky class is added to the header with JS when it reaches its scroll position */
-      .sticky {
-        position: fixed;
         top: 0;
-        width: 100%;
-        z-index: 1000;
-      }
-
-      /* Add some top padding to the page content to prevent sudden quick movement */
-      .sticky + .content {
-        padding-top: 102px;
+        position: fixed; /* Make the header fixed */
       }
 
       .container {
@@ -110,14 +98,13 @@
   <body>
     
     <!-- Header of the page -->
-    <div class="header" id="myHeader">
-      <header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+    <header class="header" id="myHeader">
+      <nav class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
         <div class="container-fluid">
           <!-- Vishnu Venugopal on the left -->
           <a class="navbar-brand" href="index.html">Vishnu Venugopal</a>
 
           <!-- Center the contact information -->
-          <!-- Setting up contact info on HEADER--> 
           <div class="d-flex flex-grow-1 justify-content-center">
             <p class="contact-info" style="display: inline-flex; justify-content: center; align-items: center; font-size: 1em; margin: 0;">
               <!-- Email Link and Icon -->
@@ -170,8 +157,8 @@
             </ul>
           </div>
         </div>
-      </header>
-    </div>
+      </nav>
+    </header>
 
     <!-- Project content here -->
     <div class="container">
@@ -275,25 +262,5 @@
       </symbol>
     </svg>
 
-    <script>
-      // When the user scrolls the page, execute myFunction
-      window.onscroll = function() {myFunction()};
-
-      // Get the header
-      var header = document.getElementById("myHeader");
-
-      // Get the offset position of the navbar
-      var sticky = header.offsetTop;
-
-      // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-      function myFunction() {
-        if (window.pageYOffset > sticky) {
-          header.classList.add("sticky");
-        } else {
-          header.classList.remove("sticky");
-        }
-      }
-    </script>
-    
   </body>
 </html>
