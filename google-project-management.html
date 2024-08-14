@@ -12,7 +12,7 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #000;
-            padding-top: 60px; /* Adjust this to avoid content overlap */
+            padding-top: 60px; /* Adjust padding to prevent content overlap with header */
         }
         .container {
             margin-top: 50px;
@@ -25,15 +25,13 @@
             text-align: center;
             color: #333;
             text-decoration: underline;
-            position: relative;
         }
         .cert-info {
             text-align: center;
             margin-bottom: 30px;
             background-color: #e9ecef;
             padding: 15px;
-            border-radius: 5px;            
-            margin-bottom: 20px;
+            border-radius: 5px;
         }
         .cert-info p {
             font-size: 1.2em;
@@ -51,9 +49,9 @@
         }
         .cert-images img:last-child {
             position: absolute;
-            top: 130px; /* Adjust this value to move the image vertically down */
-            left: 350px; /* Adjust this value to move the image horizontally right */
-            width: 130px; /* Adjust the width as needed */
+            top: 130px;
+            left: 350px;
+            width: 130px;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -61,12 +59,12 @@
         .tf-social {
             width: 1em;
             height: 1em;
-            fill: black; /* Ensure the icons are black */
+            fill: black;
         }
         .credly-link {
             text-align: center;
             margin-top: 20px;
-            font-size: 1em; /* Adjust this value to make the text size smaller */
+            font-size: 1em;
         }
         .credly-link a {
             text-decoration: underline;
@@ -79,16 +77,18 @@
         .credly-link svg {
             margin-right: 5px;
             vertical-align: middle;
-            width: 2em; /* Adjust this value to make the icon bigger */
-            height: 2em; /* Adjust this value to make the icon bigger */
+            width: 2em;
+            height: 2em;
         }
-        /* Sticky header */
+
+        /* Sticky header styles */
         header {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            background-color: #f8f9fa; /* Match the header background color */
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
