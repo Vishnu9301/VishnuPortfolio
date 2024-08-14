@@ -12,6 +12,7 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #000;
+            padding-top: 60px; /* Adjust this to avoid content overlap */
         }
         .container {
             margin-top: 50px;
@@ -81,7 +82,14 @@
             width: 2em; /* Adjust this value to make the icon bigger */
             height: 2em; /* Adjust this value to make the icon bigger */
         }
-
+        /* Sticky header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: #f8f9fa; /* Match the header background color */
+        }
     </style>
 </head>
 <body>
