@@ -1,49 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Project Management: Professional Certificate</title>
+    <meta name="title" content="Google Project Management: Professional Certificate | Vishnu Venugopal">
+    <meta name="description" content="Details of the Google Project Management Professional Certificate earned by Vishnu Venugopal.">
+    <link rel="shortcut icon" href="">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Google Project Management: Professional Certificate | Vishnu Venugopal</title>
     <style>
-      html, body {
-        height: 100%; /* Ensure full height for scrolling */
-        margin: 0;
-        padding: 0;
-      }
+        html, body {
+            height: 100%; /* Ensure full height for scrolling */
+            margin: 0;
+            padding: 0;
+        }
 
-      body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        background-color: #f8f9fa;
-        color: #343a40;
-        padding-top: 60px; /* Space for the fixed header */
-      }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #343a40;
+            padding-top: 4px; /* Space for the fixed header */
+        }
 
-      /* Style the header */
-      .header {
-        padding: 10px 16px;
-        background: #f8f9fa; /* Same background color as before */
-        color: #343a40;
-        z-index: 1000;
+        header {
+        top: 0; /* Ensure the header sticks to the top */
         width: 100%;
+        z-index: 1000;
+        background-color: #333; /* Dark grey header background */
+        border-radius: 10px; /* Smooth edges for the header */
+        padding: 10px;
+        margin-top: -4px;
+      }
+          /* The sticky class is added to the header with JS when it reaches its scroll position */
+    .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      margin-top: 4px;
+    }
+
+    /* Add some top padding to the page content to prevent sudden quick movement */
+    .sticky + .content {
+      padding-top: 102px;
+    }
+      .menu-icon {
+        cursor: pointer;
+        font-size: 24px;
+        color: white;
+        padding: 10px 20px;
+      }
+      .side-panel {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1001;
         top: 0;
-        position: fixed; /* Make the header fixed */
+        left: 0;
+        background-color: black; /* Black side panel */
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 20px;
+        border-radius: 10px; /* Smooth edges for the side panel */
+      }
+      .side-panel .closebtn {
+        position: absolute;
+        top: 15px;
+        right: 25px;
+        font-size: 36px;
+        color: white;
+        padding-left: 250px;
+        padding-bottom: 0px;
+        padding-top: 0px;
+      }
+      .side-panel a, .side-panel button {
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 18px;
+        color: white;
+        display: block;
+        transition: 0.3s;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+      }
+      .side-panel a.separator {
+        border-bottom: 1px solid #575757; /* Line between Resume, Projects, Certificates */
+      }
+      .side-panel a:hover, .side-panel button:hover {
+        background-color: #575757;
+      }
+      .dropdown-btn {
+        font-size: 18px;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        display: block;
+        border: none;
+        background: none;
+        cursor: pointer;
+        outline: none;
+        transition: 0.3s;
+        border-bottom: 1px solid #575757; /* Line between dropdowns */
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+      }
+      .dropdown-container {
+        display: none;
+        background-color: #575757;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+      .dropdown-container.show {
+        display: block;
+        max-height: 500px; /* Adjust as necessary */
+      }
+      .dropdown-container a {
+        border-bottom: 1px solid #474747; /* Line between dropdown options */
+      }
+      .contact-info {
+        margin-top: 20px;
+        padding: 10px 20px;
+        color: white;
+        text-align: center;
+      }
+      .contact-info svg {
+        width: 1.5em;
+        height: 1.5em;
+        fill: white;
+      }
+      .contact-info a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+      }
+      .contact-info a:hover {
+        text-decoration: underline;
+      }
+      .contact-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .contact-icons svg + svg {
+        margin-left: 10px;
+      }
+      .contact-icons svg + span {
+        margin: 0 10px;
+      }
+      .phone-info, .location-info {
+        margin-top: 20px; /* Add some space between phone and location info */
       }
 
-      .container {
-        margin-top: 50px;
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      }
+        .container {
+            margin-top: 50px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
         h1, h2 {
             text-align: center;
             color: #333;
             text-decoration: underline;
         }
-               .cert-info-wrapper {
+
+        .cert-info-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -53,195 +179,239 @@
             border-radius: 5px;
             margin-bottom: 20px;
             position: relative; /* Make the wrapper relative for proper positioning */
-
-            
         }
+
         .credly-badge {
             flex-shrink: 0;
             width: 130px;
             height: auto;
-                position: absolute;
-                    left: 10px; /* Adjust the left value as needed to position the badge */
-
+            position: absolute;
+            left: 10px; /* Adjust the left value as needed to position the badge */
         }
+
         .cert-info {
             text-align: center;
-    flex-grow: 1; /* Ensure the cert-info takes up remaining space */
-
+            flex-grow: 1; /* Ensure the cert-info takes up remaining space */
         }
+
         .cert-info p {
             font-size: 1.2em;
             margin: 5px 0;
         }
- 
+
         .cert-images {
             text-align: center;
             margin-top: 20px;
         }
+
         .cert-images img:first-child {
-          width: 100%; /* Make the image take up the full width of the container */
-          height: auto; /* Keep the aspect ratio */
-          border-radius: 8px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+            width: 100%; /* Make the image take up the full width of the container */
+            height: auto; /* Keep the aspect ratio */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
         .tf-social {
             width: 1em;
             height: 1em;
             fill: black;
         }
+
         .credly-link {
             text-align: center;
             margin-top: 20px;
             font-size: 1em;
         }
+
         .credly-link a {
             text-decoration: underline;
             color: #000;
             font-weight: bold;
         }
+
         .credly-link a:hover {
             text-decoration: underline;
         }
+
         .credly-link svg {
             margin-right: 5px;
             vertical-align: middle;
             width: 2em;
             height: 2em;
         }
+
+
     </style>
 </head>
+
 <body>
-    
- <!-- Header of the page -->
-    <header class="header" id="myHeader">
-      <nav class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+
+    <!-- Header of the page -->
+    <div class="header" id="myHeader">
+        <header class="navbar navbar-expand navbar-light border-bottom" style="padding-top: 0px;padding-bottom: 0px;">
+            <div class="container-fluid">
+                <span class="menu-icon" onclick="openNav()">&#9776;</span> <!-- Three dash icon -->
+            </div>
+        </header>
+    </div>
+
+    <!-- Side panel -->
+    <div id="mySidenav" class="side-panel" onclick="collapseDropdowns(event)">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <div style="margin-top: 50px;"> <!-- Added margin to push content down -->
+            <a href="index.html" class="separator">Resume</a>
+            <button class="dropdown-btn" onclick="toggleDropdown(this)">Projects
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="amazon-music-promotion-project.html">Optimization of Amazon Music Subscription Promotion Spare Claim Codes</a>
+                <a href="sauce-spoon-project.html">Sauce & Spoon Capstone Project</a>
+            </div>
+            <button class="dropdown-btn separator" onclick="toggleDropdown(this)">Certificates
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="google-project-management.html">Google Project Management: Professional Certificate</a>
+                <a href="lean-six-sigma.html">Lean Six Sigma</a>
+                <a href="asana-certification.html">ASANA</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <!-- Certificate heading section -->
+                <h1>Google Project Management: Professional Certificate</h1>
+
+                <!-- Certificate ID and date section -->
+                <div class="cert-info-wrapper">
+                    <img src="https://raw.githubusercontent.com/Vishnu9301/VishnuPortfolio/main/GoogleProjectManagementCredly.jpg" alt="Credly Badge" class="credly-badge">
+                    <div class="cert-info">
+                        <p><strong>Certification Number:</strong> GKLA9HV3L529</p>
+                        <p><strong>Certification Date:</strong> July 18th, 2024</p>
+                    </div>
+                </div>
+
+                <!-- Credly Verification Link -->
+                <div class="credly-link">
+                    <a href="https://www.credly.com/badges/b2a7784e-b438-4115-b0fa-b1f732142dc7/linked_in_profile" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M23.8 13.154a.299.299 0 0 0-.101-.024.407.407 0 0 0-.202.048c-.06.028-.092.08-.127.136-.087.128-.15.268-.226.4-.107.187-.246.351-.38.515-.135.156-.286.291-.424.44-.028.027-.072.043-.107.027-.028-.016-.036-.056-.032-.088.04-.38.075-.763.123-1.138.02-.172.043-.336.063-.512.028-.247.056-.487.087-.735l.234-1.824c.02-.128.032-.372-.135-.52a.446.446 0 0 0-.233-.116.46.46 0 0 0-.254.06c-.226.16-.297.504-.365.76-.142.603-.178 1.241-.471 1.804a1.772 1.772 0 0 1-.202.316.668.668 0 0 1-.186.18.332.332 0 0 1-.246.051.365.365 0 0 1-.238-.207.871.87 0 0 1-.063-.324 4.499 4.499 0 0 1 .24-1.585c.045-.132.089-.252.104-.383.028-.156.028-.38-.114-.516-.131-.128-.337-.18-.504-.128-.194.056-.31.244-.372.392-.198.463-.25.95-.317 1.446-.044.327-.127.64-.293.926a2.717 2.717 0 0 1-.603.72c-.118.087-.222.123-.328.107a.376.376 0 0 1-.278-.208.875.875 0 0 1-.095-.315 3.361 3.36 0 0 1-.036-.616c.004-.223 0-.44.044-.658.075-.39.678-1.937.808-2.345.135-.407.262-.823.353-1.246.08-.38.123-.767.11-1.15-.007-.277-.07-.576-.288-.736a.611.61 0 0 0-.603-.048.968.968 0 0 0-.455.428 2.53 2.53 0 0 0-.226.59 12.01 12.01 0 0 0-.266 1.29c-.071.429-.138.848-.206 1.268-.06.355-.206 1.614-.261 1.88-.06.272-.175.54-.301.787-.131.268-.258.536-.408.791a.694.694 0 0 1-.175.224c-.08.06-.182.088-.27.048-.102-.048-.146-.176-.166-.292-.075-.435-.012-.875.072-1.302.083-.431.44-2.4.519-2.851.099-.532.24-1.05.285-1.59.028-.388.09-.88-.202-1.187-.115-.136-.31-.16-.44-.136-.174.036-.31.176-.388.296-.1.128-.186.28-.258.467-.115.284-.186.615-.261.91l-.032.129c-.083.383-.143.77-.186 1.162a16.95 16.948 0 0 0-.06.632c-.008.1-.016.203-.027.307 0 .08.007.168-.028.244a.304.304 0 0 1-.052.068c-.08.072-.202.06-.31.056-.557-.016-1.045.3-1.35.755-.18.252-.281.542-.39.834-.01.048-.034.1-.054.152-.051.143-.13.327-.222.511a3.037 3.037 0 0 1-.317.46 3.285 3.285 0 0 1-.384.41 1.123 1.123 0 0 1-.515.26c-.174.04-.384-.043-.543-.203a.916.916 0 0 1-.206-.54c-.004-.055-.004-.115.028-.163.05-.068.146-.072.23-.076a1.623 1.623 0 0 0 1.375-1.015c.138-.34.178-.698.122-1.046a1.193 1.193 0 0 0-.19-.48.9.9 0 0 0-.396-.323c-.293-.14-.658-.127-1.01.004-.575.232-.951.74-1.134 1.562l-.02.088c-.114.487-.23 1-.582 1.354-.127.12-.261.163-.368.143-.044-.004-.08-.04-.103-.075-.096-.16.003-.532.15-1a4.1 4.1 0 0 0 .1-.366.925.925 0 0 0-.108-.495.783.783 0 0 0-.372-.324c-.143-.064-.31-.06-.468-.06h-.047c-.044 0-.103 0-.151-.012a.215.215 0 0 1-.147-.127.485.485 0 0 1 .016-.232c.004-.02.012-.048.016-.072a.368.368 0 0 0-.162-.412.509.509 0 0 0-.468-.036.768.768 0 0 0-.364.348.769.769 0 0 0-.103.48c.04.13.07.32.043.475-.055.28-.222.51-.384.74-.04.05-.072.106-.107.16a4.96 4.96 0 0 1-.706.825c-.372.335-.804.575-1.232.67-.745.165-1.506-.06-1.91-.734-.222-.38-.32-.827-.348-1.266a5.425 5.425 0 0 1 .424-2.516c.328-.76.816-1.52 1.715-1.614.353-.04.753.083.912.4.115.23.075.506 0 .75-.072.244-.175.49-.18.75-.003.26.124.54.37.616.238.072.495-.08.634-.29.138-.21.186-.46.245-.704a6.282 6.281 0 0 1 .662-1.634c.139-.236.297-.488.254-.76a.543.543 0 0 0-.373-.415.543.543 0 0 0-.535.144c-.134.148-.206.371-.387.43-.17.06-.35-.055-.507-.134-.6-.32-1.336-.312-1.963-.048-.634.25-1.146.735-1.526 1.294C.462 8.53.098 9.508.022 10.48c-.027.34-.031.695 0 1.038.036.46.1.854.214 1.206.139.423.317.79.547 1.094.266.34.587.6.94.747.372.148.784.22 1.192.208a3.172 3.172 0 0 0 1.177-.283 4.29 4.29 0 0 0 1.026-.68c.309-.26.594-.559.84-.89.162-.224.309-.46.44-.708a4.83 4.83 0 0 0 .178-.383c.044-.104.087-.215.202-.26.056-.043.15-.02.202.013.064.04.115.075.135.135.048.116.02.232-.004.332v.012c-.028.1-.055.203-.091.303-.14.424-.238.811-.16 1.195.045.207.128.387.25.527a.84.84 0 0 0 .504.264c.246.04.51-.028.725-.132.143-.068.278-.156.397-.26.06-.06.122-.12.174-.184.044-.06.087-.147.178-.143a.15.15 0 0 1 .107.064c.028.031.04.071.06.115.23.52.776.84 1.335.84h.07c.27 0 .556-.093.79-.22.27-.14.48-.348.7-.552.02-.016.045-.04.073-.044.035-.008.07.012.099.044a.26.26 0 0 1 .047.1c.135.34.46.6.824.66a1.1 1.1 0 0 0 .99-.356c.056-.06.104-.128.167-.176.064-.044.15-.076.222-.044.107.04.135.164.182.268.107.235.357.371.615.375.289 0 .554-.148.764-.34.195-.183.353-.399.516-.61a.328.328 0 0 1 .106-.096c.04-.024.096-.028.13 0 .033.024.045.06.06.091.163.4.587.652 1.01.648.417-.004.809-.224 1.103-.516.095-.092.194-.2.32-.21.14-.017.207.114.254.22.072.142.115.238.25.338.158.116.36.152.547.1.17-.04.34-.156.47-.316.072-.088.112-.204.19-.284.092-.087.132.028.136.1.016.116.016.236.008.352-.016.236-.052.471-.08.703-.011.068-.02.136-.063.188-.06.068-.166.08-.253.064a2.898 2.898 0 0 0-.321-.028l-.14-.016c-.201-.012-.4-.036-.61-.044h-.185c-.404 0-.733.048-1.03.16-.48.187-.852.57-1.003 1.018a1.305 1.305 0 0 0-.052.64c.04.203.13.403.282.587.265.315.68.515 1.149.543.408.02.852-.064 1.292-.26.848-.367 1.482-1.094 1.696-1.95 0-.02.01-.039.023-.043.298-.104.57-.248.813-.428.245-.187.467-.399.65-.643.09-.12.174-.243.253-.37.07-.125.13-.257.202-.38a.906.906 0 0 0 .13-.316.411.411 0 0 0-.05-.328.257.257 0 0 0-.135-.124" />
+                        </svg>
+                        Credly Verification Link
+                    </a>
+                </div>
+
+                <!-- Certificate images -->
+                <div class="cert-images">
+                    <img src="https://raw.githubusercontent.com/Vishnu9301/VishnuPortfolio/main/GoogleProjectManagementProfessionalCertificate.jpg" alt="Google Project Management Certificate">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer of the page -->
+    <footer class="navbar navbar-expand navbar-light bg-light bg-gradient border-top mt-5">
         <div class="container-fluid">
-          <!-- Vishnu Venugopal on the left -->
-          <a class="navbar-brand" href="index.html">Vishnu Venugopal</a>
-
-          <!-- Center the contact information -->
-          <div class="d-flex flex-grow-1 justify-content-center">
-            <p class="contact-info" style="display: inline-flex; justify-content: center; align-items: center; font-size: 1em; margin: 0;">
-              <!-- Email Link and Icon -->
-              <svg class="tf-social">
-                <use xlink:href="#envelope"/>
-              </svg>
-              <a href="mailto:vishnu.jake93@gmail.com" target="_blank">vishnu.jake93@gmail.com</a>
-              <span style="margin: 0 10px;">|</span>
-
-              <!-- Linkedin Link and Icon -->
-              <svg class="tf-social">
-                <use xlink:href="#linkedin"/>
-              </svg>
-              <a href="https://www.linkedin.com/in/vishnu-venugopal93/" target="_blank">LinkedIn Profile</a>
-            </p>
-          </div>
-
-          <!-- Projects and Resume on the right -->
-          <div class="ms-auto">
-            <ul class="navbar-nav mb-2 mb-lg-0">
-              
-              <!-- Dropdown for Projects -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Projects
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="projectsDropdown">
-                  <li><a class="dropdown-item" href="amazon-music-promotion-project.html">Optimization of Amazon Music Subscription Promotion Spare Claim Codes</a></li>
-                  <li><a class="dropdown-item" href="sauce-spoon-project.html">Sauce & Spoon Capstone Project</a></li>
+            <div class="ms-auto">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <small><a class="nav-link" href="#">Made by Vishnu Venugopal</a></small>
                 </ul>
-              </li>
-
-              <!-- Dropdown for Certificates -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="certificatesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Certificates
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="certificatesDropdown">
-                  <li><a class="dropdown-item" href="google-project-management.html">Google Project Management: Professional Certificate</a></li>
-                  <li><a class="dropdown-item" href="lean-six-sigma.html">Lean Six Sigma</a></li>
-                  <li><a class="dropdown-item" href="asana-certification.html">ASANA</a></li>
-                </ul>
-              </li>
-              
-              <!-- Resume Link -->
-              <li class="nav-item">
-                <a class="nav-link" href="index.html#resume">Resume</a>
-              </li>
-            </ul>
-          </div>
+            </div>
         </div>
-      </nav>
-    </header>
+    </footer>
 
-<div class="container">
-          <div class="row">
-        <div class="col">
-    <!-- Certificate heading section -->
-    <h1>Google Project Management: Professional Certificate</h1>
-
-    <!-- Certificate ID and date section -->
-        <div class="cert-info-wrapper">
-        <img src="https://raw.githubusercontent.com/Vishnu9301/VishnuPortfolio/main/GoogleProjectManagementCredly.jpg" alt="Credly Badge" class="credly-badge">
-        <div class="cert-info">
-            <p><strong>Certification Number:</strong> GKLA9HV3L529</p>
-            <p><strong>Certification Date:</strong> July 18th, 2024</p>
-        </div>
-    </div>
-        <!-- Credly Verification Link -->
-    <div class="credly-link">
-        <a href="https://www.credly.com/badges/b2a7784e-b438-4115-b0fa-b1f732142dc7/linked_in_profile" target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M23.8 13.154a.299.299 0 0 0-.101-.024.407.407 0 0 0-.202.048c-.06.028-.092.08-.127.136-.087.128-.15.268-.226.4-.107.187-.246.351-.38.515-.135.156-.286.291-.424.44-.028.027-.072.043-.107.027-.028-.016-.036-.056-.032-.088.04-.38.075-.763.123-1.138.02-.172.043-.336.063-.512.028-.247.056-.487.087-.735l.234-1.824c.02-.128.032-.372-.135-.52a.446.446 0 0 0-.233-.116.46.46 0 0 0-.254.06c-.226.16-.297.504-.365.76-.142.603-.178 1.241-.471 1.804a1.772 1.772 0 0 1-.202.316.668.668 0 0 1-.186.18.332.332 0 0 1-.246.051.365.365 0 0 1-.238-.207.871.87 0 0 1-.063-.324 4.499 4.499 0 0 1 .24-1.585c.045-.132.089-.252.104-.383.028-.156.028-.38-.114-.516-.131-.128-.337-.18-.504-.128-.194.056-.31.244-.372.392-.198.463-.25.95-.317 1.446-.044.327-.127.64-.293.926a2.717 2.717 0 0 1-.603.72c-.118.087-.222.123-.328.107a.376.376 0 0 1-.278-.208.875.875 0 0 1-.095-.315 3.361 3.36 0 0 1-.036-.616c.004-.223 0-.44.044-.658.075-.39.678-1.937.808-2.345.135-.407.262-.823.353-1.246.08-.38.123-.767.11-1.15-.007-.277-.07-.576-.288-.736a.611.61 0 0 0-.603-.048.968.968 0 0 0-.455.428 2.53 2.53 0 0 0-.226.59 12.01 12.01 0 0 0-.266 1.29c-.071.429-.138.848-.206 1.268-.06.355-.206 1.614-.261 1.88-.06.272-.175.54-.301.787-.131.268-.258.536-.408.791a.694.694 0 0 1-.175.224c-.08.06-.182.088-.27.048-.102-.048-.146-.176-.166-.292-.075-.435-.012-.875.072-1.302.083-.431.44-2.4.519-2.851.099-.532.24-1.05.285-1.59.028-.388.09-.88-.202-1.187-.115-.136-.31-.16-.44-.136-.174.036-.31.176-.388.296-.1.128-.186.28-.258.467-.115.284-.186.615-.261.91l-.032.129c-.083.383-.143.77-.186 1.162a16.95 16.948 0 0 0-.06.632c-.008.1-.016.203-.027.307 0 .08.007.168-.028.244a.304.304 0 0 1-.052.068c-.08.072-.202.06-.31.056-.557-.016-1.045.3-1.35.755-.18.252-.281.542-.39.834-.01.048-.034.1-.054.152-.051.143-.13.327-.222.511a3.037 3.037 0 0 1-.317.46 3.285 3.285 0 0 1-.384.41 1.123 1.123 0 0 1-.515.26c-.174.04-.384-.043-.543-.203a.916.916 0 0 1-.206-.54c-.004-.055-.004-.115.028-.163.05-.068.146-.072.23-.076a1.623 1.623 0 0 0 1.375-1.015c.138-.34.178-.698.122-1.046a1.193 1.193 0 0 0-.19-.48.9.9 0 0 0-.396-.323c-.293-.14-.658-.127-1.01.004-.575.232-.951.74-1.134 1.562l-.02.088c-.114.487-.23 1-.582 1.354-.127.12-.261.163-.368.143-.044-.004-.08-.04-.103-.075-.096-.16.003-.532.15-1a4.1 4.1 0 0 0 .1-.366.925.925 0 0 0-.108-.495.783.783 0 0 0-.372-.324c-.143-.064-.31-.06-.468-.06h-.047c-.044 0-.103 0-.151-.012a.215.215 0 0 1-.147-.127.485.485 0 0 1 .016-.232c.004-.02.012-.048.016-.072a.368.368 0 0 0-.162-.412.509.509 0 0 0-.468-.036.768.768 0 0 0-.364.348.769.769 0 0 0-.103.48c.04.13.07.32.043.475-.055.28-.222.51-.384.74-.04.05-.072.106-.107.16a4.96 4.96 0 0 1-.706.825c-.372.335-.804.575-1.232.67-.745.165-1.506-.06-1.91-.734-.222-.38-.32-.827-.348-1.266a5.425 5.425 0 0 1 .424-2.516c.328-.76.816-1.52 1.715-1.614.353-.04.753.083.912.4.115.23.075.506 0 .75-.072.244-.175.49-.18.75-.003.26.124.54.37.616.238.072.495-.08.634-.29.138-.21.186-.46.245-.704a6.282 6.281 0 0 1 .662-1.634c.139-.236.297-.488.254-.76a.543.543 0 0 0-.373-.415.543.543 0 0 0-.535.144c-.134.148-.206.371-.387.43-.17.06-.35-.055-.507-.134-.6-.32-1.336-.312-1.963-.048-.634.25-1.146.735-1.526 1.294C.462 8.53.098 9.508.022 10.48c-.027.34-.031.695 0 1.038.036.46.1.854.214 1.206.139.423.317.79.547 1.094.266.34.587.6.94.747.372.148.784.22 1.192.208a3.172 3.172 0 0 0 1.177-.283 4.29 4.29 0 0 0 1.026-.68c.309-.26.594-.559.84-.89.162-.224.309-.46.44-.708a4.83 4.83 0 0 0 .178-.383c.044-.104.087-.215.202-.26.056-.043.15-.02.202.013.064.04.115.075.135.135.048.116.02.232-.004.332v.012c-.028.1-.055.203-.091.303-.14.424-.238.811-.16 1.195.045.207.128.387.25.527a.84.84 0 0 0 .504.264c.246.04.51-.028.725-.132.143-.068.278-.156.397-.26.06-.06.122-.12.174-.184.044-.06.087-.147.178-.143a.15.15 0 0 1 .107.064c.028.031.04.071.06.115.23.52.776.84 1.335.84h.07c.27 0 .556-.093.79-.22.27-.14.48-.348.7-.552.02-.016.045-.04.073-.044.035-.008.07.012.099.044a.26.26 0 0 1 .047.1c.135.34.46.6.824.66a1.1 1.1 0 0 0 .99-.356c.056-.06.104-.128.167-.176.064-.044.15-.076.222-.044.107.04.135.164.182.268.107.235.357.371.615.375.289 0 .554-.148.764-.34.195-.183.353-.399.516-.61a.328.328 0 0 1 .106-.096c.04-.024.096-.028.13 0 .033.024.045.06.06.091.163.4.587.652 1.01.648.417-.004.809-.224 1.103-.516.095-.092.194-.2.32-.21.14-.017.207.114.254.22.072.142.115.238.25.338.158.116.36.152.547.1.17-.04.34-.156.47-.316.072-.088.112-.204.19-.284.092-.087.132.028.136.1.016.116.016.236.008.352-.016.236-.052.471-.08.703-.011.068-.02.136-.063.188-.06.068-.166.08-.253.064a2.898 2.898 0 0 0-.321-.028l-.14-.016c-.201-.012-.4-.036-.61-.044h-.185c-.404 0-.733.048-1.03.16-.48.187-.852.57-1.003 1.018a1.305 1.305 0 0 0-.052.64c.04.203.13.403.282.587.265.315.68.515 1.149.543.408.02.852-.064 1.292-.26.848-.367 1.482-1.094 1.696-1.95 0-.02.01-.039.023-.043.298-.104.57-.248.813-.428.245-.187.467-.399.65-.643.09-.12.174-.243.253-.37.07-.125.13-.257.202-.38a.906.906 0 0 0 .13-.316.411.411 0 0 0-.05-.328.257.257 0 0 0-.135-.124"/>
-            </svg>
-            Credly Verification Link
-        </a>
-    </div>                
-
-                
-    <!-- Certificate images -->
-    <div class="cert-images">
-        <img src="https://raw.githubusercontent.com/Vishnu9301/VishnuPortfolio/main/GoogleProjectManagementProfessionalCertificate.jpg" alt="Google Project Management Certificate">
-    </div>
-</div>
-
-<!-- Footer of the page -->
-<footer class="navbar navbar-expand navbar-light bg-light bg-gradient border-top">
-  <div class="container-fluid">
-    <div class="ms-auto">
-      <ul class="navbar-nav mb-2 mb-lg-0">
-        <small><a class="nav-link" href="#">Made by Vishnu Venugopal</a></small>
-      </ul>
-    </div>
-  </div>
-</footer>
-
-<!-- Bootstrap -->
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    <!-- JavaScript for side panel -->
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            closeDropdowns(); // Close all dropdowns when closing the side panel
+        }
+
+        function closeDropdowns() {
+            var dropdowns = document.getElementsByClassName("dropdown-container");
+            for (var i = 0; i < dropdowns.length; i++) {
+                dropdowns[i].classList.remove("show");
+            }
+        }
+
+        function toggleDropdown(button) {
+            var dropdownContent = button.nextElementSibling;
+            if (dropdownContent.classList.contains("show")) {
+                dropdownContent.classList.remove("show");
+            } else {
+                closeDropdowns(); // Close any open dropdowns
+                dropdownContent.classList.add("show");
+            }
+        }
+
+        /* Close the side panel and dropdowns if the user clicks outside of it */
+        window.onclick = function(event) {
+            if (!event.target.matches('.menu-icon') && !event.target.closest('.side-panel')) {
+                closeNav();
+            }
+        };
+
+        /* Close dropdowns and side panel when clicking the close button */
+        document.querySelector('.closebtn').onclick = function() {
+            closeNav();
+        };
+
+        /* Collapse dropdowns if clicking on any blank space inside the side panel */
+        function collapseDropdowns(event) {
+            if (event.target.closest('.dropdown-container') === null && !event.target.matches('.dropdown-btn')) {
+                closeDropdowns();
+            }
+        }
+
+        // When the user scrolls the page, execute myFunction
+        window.onscroll = function() { myFunction() };
+
+        // Get the header
+        var header = document.getElementById("myHeader");
+
+        // Get the offset position of the navbar
+        var sticky = header.offsetTop;
+
+        // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
 
     <!-- Icons -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-      
-      <!-- Envelope Icon -->
-      <symbol id="envelope" viewBox="0 0 16 16">
-        <path fill="black" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm14-.5H2a.5.5 0 0 0-.5.5v.217l6.5 3.9 6.5-3.9V4a.5.5 0 0 0-.5-.5zm.5 1.541L8.356 9.75a.5.5 0 0 1-.712 0L1 5.041V12a.5.5 0 0 0 .5.5h12a.5.5 0 0 0 .5-.5V5.041z"/>
-      </symbol>
-      
-      <!-- LinkedIn Icon -->
-      <symbol id="linkedin" viewBox="0 0 16 16">
-        <path fill="black" d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
-      </symbol>
-      
-      <!-- Phone Icon -->
-      <symbol id="phone" viewBox="0 0 16 16">
-        <path fill="black" d="M3.654 1.328a1.75 1.75 0 0 1 2.884-.163l1.857 2.318a1.75 1.75 0 0 1-.263 2.4l-.637.637a.25.25 0 0 0-.057.195c.067.522.248 1.05.541 1.574.294.523.623.994 1.003 1.364.385.374.867.676 1.377.867.052.02.107.034.162.048a.25.25 0 0 0 .206-.058l.637-.637a1.75 1.75 0 0 1 2.4-.263l2.318 1.857a1.75 1.75 0 0 1-.163 2.884l-1.754 1.169a3.25 3.25 0 0 1-3.214.291c-.72-.352-1.4-.761-2.044-1.229a32.634 32.634 0 0 1-5.078-5.078 32.634 32.634 0 0 1-1.228-2.044 3.25 3.25 0 0 1 .29-3.214l1.17-1.754z"/>
-      </symbol>
-      
-      <!-- Location Icon -->
-      <symbol id="location" viewBox="0 0 16 16">
-        <path fill="black" d="M8 16s6-5.686 6-10A6 6 0 1 0 2 6c0 4.314 6 10 6 10zm0-8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
-      </symbol>
+        <!-- Envelope Icon -->
+        <symbol id="envelope" viewBox="0 0 16 16">
+            <path fill="black" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm14-.5H2a.5.5 0 0 0-.5.5v.217l6.5 3.9 6.5-3.9V4a.5.5 0 0 0-.5-.5zm.5 1.541L8.356 9.75a.5.5 0 0 1-.712 0L1 5.041V12a.5.5 0 0 0 .5.5h12a.5.5 0 0 0 .5-.5V5.041z" />
+        </symbol>
+        <!-- LinkedIn Icon -->
+        <symbol id="linkedin" viewBox="0 0 16 16">
+            <path fill="black" d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z" />
+        </symbol>
+        <!-- Phone Icon -->
+        <symbol id="phone" viewBox="0 0 16 16">
+            <path fill="black" d="M3.654 1.328a1.75 1.75 0 0 1 2.884-.163l1.857 2.318a1.75 1.75 0 0 1-.263 2.4l-.637.637a.25.25 0 0 0-.057.195c.067.522.248 1.05.541 1.574.294.523.623.994 1.003 1.364.385.374.867.676 1.377.867.052.02.107.034.162.048a.25.25 0 0 0 .206-.058l.637-.637a1.75 1.75 0 0 1 2.4-.263l2.318 1.857a1.75 1.75 0 0 1-.163 2.884l-1.754 1.169a3.25 3.25 0 0 1-3.214.291c-.72-.352-1.4-.761-2.044-1.229a32.634 32.634 0 0 1-5.078-5.078 32.634 32.634 0 0 1-1.228-2.044 3.25 3.25 0 0 1 .29-3.214l1.17-1.754z" />
+        </symbol>
+        <!-- Location Icon -->
+        <symbol id="location" viewBox="0 0 16 16">
+            <path fill="black" d="M8 16s6-5.686 6-10A6 6 0 1 0 2 6c0 4.314 6 10 6 10zm0-8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
+        </symbol>
     </svg>
-    
-  </body>
+
+</body>
+
 </html>
