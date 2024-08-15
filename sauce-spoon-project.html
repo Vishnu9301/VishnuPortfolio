@@ -20,26 +20,151 @@
         line-height: 1.6;
         background-color: #f8f9fa;
         color: #343a40;
-        padding-top: 60px; /* Space for the fixed header */
+        padding-top: 4px; /* Adjusted padding to avoid content overlap with sticky header */
       }
 
-      /* Style the header */
-      .header {
-        padding: 10px 16px;
-        background: #f8f9fa; /* Same background color as before */
-        color: #343a40;
-        z-index: 1000;
+      header {
+        top: 0; /* Ensure the header sticks to the top */
         width: 100%;
+        z-index: 1000;
+        background-color: #333; /* Dark grey header background */
+        border-radius: 10px; /* Smooth edges for the header */
+        padding: 10px;
+        margin-top: -4px;
+      }
+          /* The sticky class is added to the header with JS when it reaches its scroll position */
+    .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      margin-top: 4px;
+    }
+
+    /* Add some top padding to the page content to prevent sudden quick movement */
+    .sticky + .content {
+      padding-top: 102px;
+    }
+      .menu-icon {
+        cursor: pointer;
+        font-size: 24px;
+        color: white;
+        padding: 10px 20px;
+      }
+      .side-panel {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1001;
         top: 0;
-        position: fixed; /* Make the header fixed */
+        left: 0;
+        background-color: black; /* Black side panel */
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 20px;
+        border-radius: 10px; /* Smooth edges for the side panel */
+      }
+      .side-panel .closebtn {
+        position: absolute;
+        top: 15px;
+        right: 25px;
+        font-size: 36px;
+        color: white;
+        padding-left: 250px;
+        padding-bottom: 0px;
+        padding-top: 0px;
+      }
+      .side-panel a, .side-panel button {
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 18px;
+        color: white;
+        display: block;
+        transition: 0.3s;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+      }
+      .side-panel a.separator {
+        border-bottom: 1px solid #575757; /* Line between Resume, Projects, Certificates */
+      }
+      .side-panel a:hover, .side-panel button:hover {
+        background-color: #575757;
+      }
+      .dropdown-btn {
+        font-size: 18px;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        display: block;
+        border: none;
+        background: none;
+        cursor: pointer;
+        outline: none;
+        transition: 0.3s;
+        border-bottom: 1px solid #575757; /* Line between dropdowns */
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+      }
+      .dropdown-container {
+        display: none;
+        background-color: #575757;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+      .dropdown-container.show {
+        display: block;
+        max-height: 500px; /* Adjust as necessary */
+      }
+      .dropdown-container a {
+        border-bottom: 1px solid #474747; /* Line between dropdown options */
+      }
+      .contact-info {
+        margin-top: 20px;
+        padding: 10px 20px;
+        color: white;
+        text-align: center;
+      }
+      .contact-info svg {
+        width: 1.5em;
+        height: 1.5em;
+        fill: white;
+      }
+      .contact-info a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+      }
+      .contact-info a:hover {
+        text-decoration: underline;
+      }
+      .contact-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .contact-icons svg + svg {
+        margin-left: 10px;
+      }
+      .contact-icons svg + span {
+        margin: 0 10px;
+      }
+      .phone-info, .location-info {
+        margin-top: 20px; /* Add some space between phone and location info */
       }
 
-      .container {
-        margin-top: 50px;
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      .underline {
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+      .bold {
+        font-weight: bold;
+      }
+
+      .italic {
+        font-style: italic;
       }
 
       h1, h2, h3, h4 {
@@ -54,11 +179,6 @@
       .highlight {
         font-weight: bold;
         color: #495057;
-      }
-
-      .underline {
-        text-decoration: underline;
-        font-weight: bold;
       }
 
       .summary {
@@ -80,89 +200,86 @@
         margin: 40px 0;
       }
 
-      .bold {
-        font-weight: bold;
-      }
-
-      .italic {
-        font-style: italic;
-      }
-
-      .tf-social {
-        width: 1em;
-        height: 1em;
-        fill: black; /* Ensure the icons are black */
+      .container {
+        margin-top: 50px;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       }
     </style>
   </head>
   <body>
-    
+
     <!-- Header of the page -->
-    <header class="header" id="myHeader">
-      <nav class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+    <div class="header" id="myHeader">
+      <header class="navbar navbar-expand navbar-light border-bottom" style="padding-top: 0px;padding-bottom: 0px;">
         <div class="container-fluid">
-          <!-- Vishnu Venugopal on the left -->
-          <a class="navbar-brand" href="index.html">Vishnu Venugopal</a>
-
-          <!-- Center the contact information -->
-          <div class="d-flex flex-grow-1 justify-content-center">
-            <p class="contact-info" style="display: inline-flex; justify-content: center; align-items: center; font-size: 1em; margin: 0;">
-              <!-- Email Link and Icon -->
-              <svg class="tf-social">
-                <use xlink:href="#envelope"/>
-              </svg>
-              <a href="mailto:vishnu.jake93@gmail.com" target="_blank">vishnu.jake93@gmail.com</a>
-              <span style="margin: 0 10px;">|</span>
-
-              <!-- Linkedin Link and Icon -->
-              <svg class="tf-social">
-                <use xlink:href="#linkedin"/>
-              </svg>
-              <a href="https://www.linkedin.com/in/vishnu-venugopal93/" target="_blank">LinkedIn Profile</a>
-            </p>
-          </div>
-
-          <!-- Projects and Resume on the right -->
-          <div class="ms-auto">
-            <ul class="navbar-nav mb-2 mb-lg-0">
-              
-              <!-- Dropdown for Projects -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Projects
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="projectsDropdown">
-                  <li><a class="dropdown-item" href="amazon-music-promotion-project.html">Optimization of Amazon Music Subscription Promotion Spare Claim Codes</a></li>
-                  <li><a class="dropdown-item" href="sauce-spoon-project.html">Sauce & Spoon Capstone Project</a></li>
-                </ul>
-              </li>
-
-              <!-- Dropdown for Certificates -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="certificatesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Certificates
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="certificatesDropdown">
-                  <li><a class="dropdown-item" href="google-project-management.html">Google Project Management: Professional Certificate</a></li>
-                  <li><a class="dropdown-item" href="lean-six-sigma.html">Lean Six Sigma</a></li>
-                  <li><a class="dropdown-item" href="asana-certification.html">ASANA</a></li>
-                </ul>
-              </li>
-              
-              <!-- Resume Link -->
-              <li class="nav-item">
-                <a class="nav-link" href="index.html#resume">Resume</a>
-              </li>
-            </ul>
-          </div>
+          <span class="menu-icon" onclick="openNav()">&#9776;</span> <!-- Three dash icon -->
         </div>
-      </nav>
-    </header>
+      </header>
+    </div>
+
+    <!-- Side panel -->
+    <div id="mySidenav" class="side-panel" onclick="collapseDropdowns(event)">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+      <div style="margin-top: 50px;"> <!-- Added margin to push content down -->
+
+        <a href="index.html" class="separator">Resume</a>
+        <button class="dropdown-btn" onclick="toggleDropdown(this)">Projects
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a href="amazon-music-promotion-project.html">Optimization of Amazon Music Subscription Promotion Spare Claim Codes</a>
+          <a href="sauce-spoon-project.html">Sauce & Spoon Capstone Project</a>
+        </div>
+        <button class="dropdown-btn separator" onclick="toggleDropdown(this)">Certificates
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a href="google-project-management.html">Google Project Management: Professional Certificate</a>
+          <a href="lean-six-sigma.html">Lean Six Sigma</a>
+          <a href="asana-certification.html">ASANA</a>
+        </div>
+      </div>
+
+      <!-- Contact info -->
+      <div class="contact-info">
+        <div class="contact-icons">
+          <a href="mailto:vishnu.jake93@gmail.com" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="envelope">
+              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm14-.5H2a.5.5 0 0 0-.5.5v.217l6.5 3.9 6.5-3.9V4a.5.5 0 0 0-.5-.5zm.5 1.541L8.356 9.75a.5.5 0 0 1-.712 0L1 5.041V12a.5.5 0 0 0 .5.5h12a.5.5 0 0 0 .5-.5V5.041z"></path>
+            </svg>
+          </a>
+          <span>|</span>
+          <a href="https://www.linkedin.com/in/vishnu-venugopal93/" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="linkedin">
+              <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="phone-info">
+          <!-- Phone Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="phone">
+            <path d="M3.654 1.328a1.75 1.75 0 0 1 2.884-.163l1.857 2.318a1.75 1.75 0 0 1-.263 2.4l-.637.637a.25.25 0 0 0-.057.195c.067.522.248 1.05.541 1.574.294.523.623.994 1.003 1.364.385.374.867.676 1.377.867.052.02.107.034.162.048a.25.25 0 0 0 .206-.058l.637-.637a1.75 1.75 0 0 1 2.4-.263l2.318 1.857a1.75 1.75 0 0 1-.163 2.884l-1.754 1.169a3.25 3.25 0 0 1-3.214.291c-.72-.352-1.4-.761-2.044-1.229a32.634 32.634 0 0 1-5.078-5.078 32.634 32.634 0 0 1-1.228-2.044 3.25 3.25 0 0 1 .29-3.214l1.17-1.754z"></path>
+          </svg>
+          +91-9657991046
+        </div>
+        <div class="location-info">
+          <!-- Location Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="location">
+            <path d="M8 16s6-5.686 6-10A6 6 0 1 0 2 6c0 4.314 6 10 6 10zm0-8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
+          </svg>
+          India
+        </div>
+      </div>
+    </div>
 
     <!-- Project content here -->
     <div class="container">
       <!-- Project heading section -->
-      <div class="row">
+      <div class="row" style="padding-top: 20px;">
         <div class="col">
           <h1 class="display-4 text-center">Sauce & Spoon Capstone Project</h1>
 
@@ -174,7 +291,7 @@
         </div>
       </div>
 
-      <!-- Project summary -->  
+      <!-- Project summary -->
       <div class="row mt-4">
         <div class="col">
           <h2 class="underline">Summary</h2>
@@ -182,20 +299,20 @@
 
           <div class="section-divider"></div>
 
-          <!-- Project Solution -->  
+          <!-- Project Solution -->
           <h2 class="underline">Solution</h2>
           <p>To address the increasing service delays and negative customer feedback, I implemented a strategic rollout of tabletop menu tablets. The solution involved a comprehensive plan that included selecting the right tablet packages, training staff, and integrating the new system with existing POS software. This initiative aimed to decrease table turn time, reduce food waste, and boost customer satisfaction. By leveraging data-driven decision-making, I ensured that the tablets were effectively used to increase sales, improve order accuracy, and reduce employee burnout, leading to measurable improvements in the restaurant’s operational efficiency and profitability.</p>
-          <!-- Project Solution Subsection -->  
+          <!-- Project Solution Subsection -->
           <h4 class="bold">Key achievements include:</h4>
           <ul>
             <li>A 15% increase in product mix through tablet-integrated menu add-ons and coupons.</li>
             <li>A 30-minute reduction in average table turn time, improving overall customer wait times.</li>
             <li>A 25% decrease in food waste and a 15% reduction in meal comps by streamlining communication between the waitstaff and kitchen.</li>
           </ul>
-          
-          <div class="section-divider"></div>        
 
-          <!-- Project Approach -->  
+          <div class="section-divider"></div>
+
+          <!-- Project Approach -->
           <h2 class="underline">Approach</h2>
           <p>My approach to the Sauce & Spoon project was meticulous, involving several critical steps to ensure successful delivery:</p>
 
@@ -237,29 +354,89 @@
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
+    <!-- JavaScript for side panel -->
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        closeDropdowns(); // Close all dropdowns when closing the side panel
+      }
+
+      function closeDropdowns() {
+        var dropdowns = document.getElementsByClassName("dropdown-container");
+        for (var i = 0; i < dropdowns.length; i++) {
+          dropdowns[i].classList.remove("show");
+        }
+      }
+
+      function toggleDropdown(button) {
+        var dropdownContent = button.nextElementSibling;
+        if (dropdownContent.classList.contains("show")) {
+          dropdownContent.classList.remove("show");
+        } else {
+          closeDropdowns(); // Close any open dropdowns
+          dropdownContent.classList.add("show");
+        }
+      }
+
+      /* Close the side panel and dropdowns if the user clicks outside of it */
+      window.onclick = function(event) {
+        if (!event.target.matches('.menu-icon') && !event.target.closest('.side-panel')) {
+          closeNav();
+        }
+      };
+
+      /* Close dropdowns and side panel when clicking the close button */
+      document.querySelector('.closebtn').onclick = function() {
+        closeNav();
+      };
+
+      /* Collapse dropdowns if clicking on any blank space inside the side panel */
+      function collapseDropdowns(event) {
+        if (event.target.closest('.dropdown-container') === null && !event.target.matches('.dropdown-btn')) {
+          closeDropdowns();
+        }
+      }
+
+      // Sticky header functionality
+      window.onscroll = function() {myFunction()};
+
+      var header = document.getElementById("myHeader");
+      var sticky = header.offsetTop;
+
+      function myFunction() {
+        if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+        } else {
+          header.classList.remove("sticky");
+        }
+      }
+    </script>
+
     <!-- Icons -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-      
       <!-- Envelope Icon -->
       <symbol id="envelope" viewBox="0 0 16 16">
         <path fill="black" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm14-.5H2a.5.5 0 0 0-.5.5v.217l6.5 3.9 6.5-3.9V4a.5.5 0 0 0-.5-.5zm.5 1.541L8.356 9.75a.5.5 0 0 1-.712 0L1 5.041V12a.5.5 0 0 0 .5.5h12a.5.5 0 0 0 .5-.5V5.041z"/>
       </symbol>
-      
+
       <!-- LinkedIn Icon -->
       <symbol id="linkedin" viewBox="0 0 16 16">
         <path fill="black" d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
       </symbol>
-      
+
       <!-- Phone Icon -->
       <symbol id="phone" viewBox="0 0 16 16">
         <path fill="black" d="M3.654 1.328a1.75 1.75 0 0 1 2.884-.163l1.857 2.318a1.75 1.75 0 0 1-.263 2.4l-.637.637a.25.25 0 0 0-.057.195c.067.522.248 1.05.541 1.574.294.523.623.994 1.003 1.364.385.374.867.676 1.377.867.052.02.107.034.162.048a.25.25 0 0 0 .206-.058l.637-.637a1.75 1.75 0 0 1 2.4-.263l2.318 1.857a1.75 1.75 0 0 1-.163 2.884l-1.754 1.169a3.25 3.25 0 0 1-3.214.291c-.72-.352-1.4-.761-2.044-1.229a32.634 32.634 0 0 1-5.078-5.078 32.634 32.634 0 0 1-1.228-2.044 3.25 3.25 0 0 1 .29-3.214l1.17-1.754z"/>
       </symbol>
-      
+
       <!-- Location Icon -->
       <symbol id="location" viewBox="0 0 16 16">
         <path fill="black" d="M8 16s6-5.686 6-10A6 6 0 1 0 2 6c0 4.314 6 10 6 10zm0-8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
       </symbol>
     </svg>
-
   </body>
 </html>
