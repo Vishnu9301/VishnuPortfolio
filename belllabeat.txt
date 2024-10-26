@@ -1,0 +1,217 @@
+-- STEP 1: Create and Load Database - Create the data base called "bellabeat_case_study"
+CREATE DATABASE bellabeat_case_study;
+USE bellabeat_case_study;
+
+
+
+-- STEP 2: Download the dataset.Dataset information: FitBit Fitness Tracker Data (CC0: Public Domain, dataset made available through Mobius): This Kaggle data set
+-- contains personal fitness tracker from thirty fitbit users. Thirty eligible Fitbit users consented to the submission of
+-- personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring. It includes
+-- information about daily activity, steps, and heart rate that can be used to explore users’ habits. 
+
+
+
+-- STEP 3: Create Table for daily activity
+
+-- Create a table for "dailyActivity_merged.csv" This table should match the structure of the CSV files.
+
+CREATE TABLE daily_activity (
+    Id BIGINT,
+    ActivityDate DATE,
+    TotalSteps INT,
+    TotalDistance FLOAT,
+    TrackerDistance FLOAT,
+    LoggedActivitiesDistance FLOAT,
+    VeryActiveDistance FLOAT,
+    ModeratelyActiveDistance FLOAT,
+    LightActiveDistance FLOAT,
+    SedentaryActiveDistance FLOAT,
+    VeryActiveMinutes INT,
+    FairlyActiveMinutes INT,
+    LightlyActiveMinutes INT,
+    SedentaryMinutes INT,
+    Calories INT
+);
+
+-- STEP 3.1 - Import "dailyActivity_merged CSVs" from Both Folders downloaded in STEP 2.
+-- Using LOAD DATA INFILE command, we will import dailyActivity_merged.csv for time frame 3.12.16-4.11.16 into table "daily_activity"
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 3.12.16-4.11.16/dailyActivity_merged.csv'
+INTO TABLE daily_activity
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Id, @ActivityDate, TotalSteps, TotalDistance, TrackerDistance, LoggedActivitiesDistance, VeryActiveDistance, ModeratelyActiveDistance, LightActiveDistance, SedentaryActiveDistance, VeryActiveMinutes, FairlyActiveMinutes, LightlyActiveMinutes, SedentaryMinutes, Calories)
+SET ActivityDate = STR_TO_DATE(@ActivityDate, '%m/%d/%Y');
+
+-- STEP 3.1.1 - Filter Data: Ensure that all records fall within the observation time frame (2016-03-12 to 2016-04-11)
+DELETE FROM daily_activity
+WHERE ActivityDate NOT BETWEEN '2016-03-12' AND '2016-04-11';
+
+
+
+
+-- STEP 3.2 Load dailyActivity_merged.csv again, but for the time frame 4.12.16-5.12.16 into the same table "daily_activity" which will merge both the csv files into one table.
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 4.12.16-5.12.16/dailyActivity_merged.csv'
+INTO TABLE daily_activity
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Id, @ActivityDate, TotalSteps, TotalDistance, TrackerDistance, LoggedActivitiesDistance, VeryActiveDistance, ModeratelyActiveDistance, LightActiveDistance, SedentaryActiveDistance, VeryActiveMinutes, FairlyActiveMinutes, LightlyActiveMinutes, SedentaryMinutes, Calories)
+SET ActivityDate = STR_TO_DATE(@ActivityDate, '%m/%d/%Y');
+
+-- STEP 3.2.1 - Filter Data: Ensure that all records fall within the observation time frame (2016-03-12 to 2016-05-12)
+
+DELETE FROM daily_activity
+WHERE ActivityDate NOT BETWEEN '2016-03-12' AND '2016-05-12';
+
+
+
+-- STEP 4: Clean the daily_activity Table
+
+-- STEP 4.1 - Identify Duplicates where the same Id and Activity date count occurs more than once.
+-- This query groups the data by Id and ActivityDate, counting the occurrences of each. If the count is greater than 1, it means there are duplicates.
+SELECT
+    Id, 
+    ActivityDate,
+    COUNT(*)
+FROM daily_activity
+GROUP BY 
+    Id, ActivityDate
+HAVING COUNT(*) > 1;
+
+-- Finding which duplicates to remove
+SELECT * 
+FROM daily_activity t1
+INNER JOIN daily_activity t2 
+ON t1.Id = t2.Id 
+AND t1.ActivityDate = t2.ActivityDate
+WHERE t1.Calories <> t2.Calories
+ORDER BY t1.Id;
+
+-- Removing duplicates, if there are duplicate records across the two date ranges
+DELETE t1
+FROM daily_activity t1
+INNER JOIN daily_activity t2 
+ON t1.Id = t2.Id 
+AND t1.ActivityDate = t2.ActivityDate
+WHERE t1.TotalSteps = 0
+   OR t1.Calories < t2.Calories;
+
+-- STEP 4.2 - Trim Spaces: Use the TRIM() function to clean up any spaces from string fields:
+
+UPDATE daily_activity
+SET 
+    ActivityDate = TRIM(ActivityDate),
+    TotalSteps = TRIM(TotalSteps),
+    TotalDistance = TRIM(TotalDistance),
+    TrackerDistance = TRIM(TrackerDistance),
+    LoggedActivitiesDistance = TRIM(LoggedActivitiesDistance),
+    VeryActiveDistance = TRIM(VeryActiveDistance),
+    ModeratelyActiveDistance = TRIM(ModeratelyActiveDistance),
+    LightActiveDistance = TRIM(LightActiveDistance),
+    SedentaryActiveDistance = TRIM(SedentaryActiveDistance),
+    VeryActiveMinutes = TRIM(VeryActiveMinutes),
+    FairlyActiveMinutes = TRIM(FairlyActiveMinutes),
+    LightlyActiveMinutes = TRIM(LightlyActiveMinutes),
+    SedentaryMinutes = TRIM(SedentaryMinutes),
+    Calories = TRIM(Calories);
+
+
+
+-- STEP 4.3 - Check and delete Missing or Null Values
+SELECT * FROM daily_activity
+WHERE TotalSteps IS NULL
+   OR TotalDistance IS NULL
+   OR Calories IS NULL;
+
+DELETE FROM daily_activity
+WHERE TotalSteps IS NULL
+   OR TotalDistance IS NULL
+   OR Calories IS NULL;
+
+-- STEP 4.4 - Standardize Date Formats
+SELECT ActivityDate 
+FROM daily_activity
+WHERE ActivityDate NOT REGEXP '^[0-9]{4}-[0-9]{2}-[0-9]{2}$';
+
+-- STEP 4.5 - Ensure Numeric Columns Have Valid Data
+SELECT *
+FROM daily_activity
+WHERE TotalSteps < 0
+   OR TotalDistance < 0
+   OR Calories < 0;
+
+-- STEP 4.6 - Verify Data Integrity: To ensure everything was imported and cleaned correctly
+SELECT DISTINCT(Id) FROM daily_activity;
+
+
+-- STEP 5 - Create table for heartrate_seconds_merged
+DROP TABLE heartrate_seconds;
+
+CREATE TABLE heartrate_seconds (
+    Id BIGINT,
+    Time TIMESTAMP,
+    Value INT
+);
+
+-- STEP 5.1 -  Import heartrate_seconds_merged CSV Files
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 3.12.16-4.11.16/heartrate_seconds_merged.csv'
+INTO TABLE heartrate_seconds
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Id, @Time, Value)
+SET Time = STR_TO_DATE(@Time, '%m/%d/%Y %r');
+
+-- STEP 5.1.1 - Filter Data: Ensure that all records fall within the observation time frame (BETWEEN '2016-03-12 00:00:00' AND '2016-04-11 23:59:59')
+DELETE FROM heartrate_seconds
+WHERE Time NOT BETWEEN '2016-03-12 00:00:00' AND '2016-04-11 23:59:59';
+
+
+
+-- STEP 5.2 Load dheartrate_seconds_merged.csv again, but for the time frame BETWEEN '2016-03-12 00:00:00' AND '2016-05-12 23:59:59' into the same table "heartrate_seconds" which will merge both the csv files into one table.
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 4.12.16-5.12.16/heartrate_seconds_merged.csv'
+INTO TABLE heartrate_seconds
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Id, @Time, Value)
+SET Time = STR_TO_DATE(@Time, '%m/%d/%Y %r');
+
+-- STEP 5.2.1 - Filter Data: Ensure that all records fall within the observation time frame (BETWEEN '2016-03-12 00:00:00' AND '2016-05-12 23:59:59')
+
+DELETE FROM heartrate_seconds
+WHERE Time NOT BETWEEN '2016-03-12 00:00:00' AND '2016-05-12 23:59:59';
+
+-- STEP 6 - CLEANING
+-- STEP 6.1 - Finding and Removing duplicate records
+-- Since the data is from two different folders with overlapping dates, there might be duplicate records for the same Id and Time. Let’s remove these duplicates, keeping the record with the higher Value (heart rate) if there are duplicates.
+
+SELECT Id, Time, COUNT(*)
+FROM heartrate_seconds
+GROUP BY Id, Time
+HAVING COUNT(*) > 1;
+
+-- By creating an index on the Id and Time columns, MySQL can quickly locate rows where these values match, speeding up queries like joins or searches based on these columns.
+CREATE INDEX idx_heartrate ON heartrate_seconds (Id, Time);
+
+
+DELETE t1
+FROM heartrate_seconds t1
+INNER JOIN heartrate_seconds t2 
+ON t1.Id = t2.Id 
+AND t1.Time = t2.Time
+WHERE t1.Value < t2.Value;
+
+-- STEP 6.2 - Check for Missing or Invalid Values
+SELECT * FROM heartrate_seconds
+WHERE Value IS NULL OR Value <= 0;
+
+
+
+
+
