@@ -143,20 +143,53 @@ WHERE TotalSteps < 0
    OR TotalDistance < 0
    OR Calories < 0;
 
--- STEP 4.6 - Verify Data Integrity: To ensure everything was imported and cleaned correctly
+-- STEP 5 - Integrity check
+-- STEP 5.1 - View a Random Sample of Records
+SELECT * FROM daily_activity
+ORDER BY RAND()
+LIMIT 10;
+
+-- STEP 5.2 - Check Earliest and Latest Dates, Total Records, and Unique Users
+SELECT 
+    MIN(ActivityDate) AS earliest_date,
+    MAX(ActivityDate) AS latest_date,
+    COUNT(*) AS total_records,
+    COUNT(DISTINCT Id) AS unique_users
+FROM daily_activity;
+
+-- STEP 5.3 - Check for Null Values in Key Columns
+SELECT 
+    COUNT(*) AS total_rows,
+    COUNT(TotalSteps) AS non_null_steps,
+    COUNT(TotalDistance) AS non_null_distance,
+    COUNT(Calories) AS non_null_calories
+FROM daily_activity;
+
+-- STEP 5.3 - Basic Descriptive Statistics
+SELECT 
+    MIN(TotalSteps) AS min_steps,
+    MAX(TotalSteps) AS max_steps,
+    AVG(TotalSteps) AS avg_steps,
+    MIN(Calories) AS min_calories,
+    MAX(Calories) AS max_calories,
+    AVG(Calories) AS avg_calories
+FROM daily_activity;
+
 SELECT DISTINCT(Id) FROM daily_activity;
 
 
--- STEP 5 - Create table for heartrate_seconds_merged
-DROP TABLE heartrate_seconds;
 
+
+
+
+-- STEP 6 - Create table for heartrate_seconds_merged
 CREATE TABLE heartrate_seconds (
     Id BIGINT,
     Time TIMESTAMP,
     Value INT
 );
 
--- STEP 5.1 -  Import heartrate_seconds_merged CSV Files
+-- STEP 6.1 -  Import heartrate_seconds_merged CSV Files
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 3.12.16-4.11.16/heartrate_seconds_merged.csv'
 INTO TABLE heartrate_seconds
 FIELDS TERMINATED BY ',' 
@@ -166,13 +199,13 @@ IGNORE 1 ROWS
 (Id, @Time, Value)
 SET Time = STR_TO_DATE(@Time, '%m/%d/%Y %r');
 
--- STEP 5.1.1 - Filter Data: Ensure that all records fall within the observation time frame (BETWEEN '2016-03-12 00:00:00' AND '2016-04-11 23:59:59')
+-- STEP 6.1.1 - Filter Data: Ensure that all records fall within the observation time frame (BETWEEN '2016-03-12 00:00:00' AND '2016-04-11 23:59:59')
 DELETE FROM heartrate_seconds
 WHERE Time NOT BETWEEN '2016-03-12 00:00:00' AND '2016-04-11 23:59:59';
 
 
 
--- STEP 5.2 Load dheartrate_seconds_merged.csv again, but for the time frame BETWEEN '2016-03-12 00:00:00' AND '2016-05-12 23:59:59' into the same table "heartrate_seconds" which will merge both the csv files into one table.
+-- STEP 6.2 Load heartrate_seconds_merged.csv again, but for the time frame BETWEEN '2016-03-12 00:00:00' AND '2016-05-12 23:59:59' into the same table "heartrate_seconds" which will merge both the csv files into one table.
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 4.12.16-5.12.16/heartrate_seconds_merged.csv'
 INTO TABLE heartrate_seconds
 FIELDS TERMINATED BY ',' 
@@ -182,13 +215,13 @@ IGNORE 1 ROWS
 (Id, @Time, Value)
 SET Time = STR_TO_DATE(@Time, '%m/%d/%Y %r');
 
--- STEP 5.2.1 - Filter Data: Ensure that all records fall within the observation time frame (BETWEEN '2016-03-12 00:00:00' AND '2016-05-12 23:59:59')
+-- STEP 6.2.1 - Filter Data: Ensure that all records fall within the observation time frame (BETWEEN '2016-03-12 00:00:00' AND '2016-05-12 23:59:59')
 
 DELETE FROM heartrate_seconds
 WHERE Time NOT BETWEEN '2016-03-12 00:00:00' AND '2016-05-12 23:59:59';
 
--- STEP 6 - CLEANING
--- STEP 6.1 - Finding and Removing duplicate records
+-- STEP 7 - CLEANING
+-- STEP 7.1 - Finding and Removing duplicate records
 -- Since the data is from two different folders with overlapping dates, there might be duplicate records for the same Id and Time. Let’s remove these duplicates, keeping the record with the higher Value (heart rate) if there are duplicates.
 
 SELECT Id, Time, COUNT(*)
@@ -199,7 +232,7 @@ HAVING COUNT(*) > 1;
 -- By creating an index on the Id and Time columns, MySQL can quickly locate rows where these values match, speeding up queries like joins or searches based on these columns.
 CREATE INDEX idx_heartrate ON heartrate_seconds (Id, Time);
 
-
+-- Deleting any duplicates
 DELETE t1
 FROM heartrate_seconds t1
 INNER JOIN heartrate_seconds t2 
@@ -207,11 +240,338 @@ ON t1.Id = t2.Id
 AND t1.Time = t2.Time
 WHERE t1.Value < t2.Value;
 
--- STEP 6.2 - Check for Missing or Invalid Values
+-- STEP 7.2 - Check for Missing or Invalid Values
 SELECT * FROM heartrate_seconds
 WHERE Value IS NULL OR Value <= 0;
 
+-- STEP 8 - Integrity check
+-- STEP 8.1 - View a Random Sample of Records
+
+SELECT * FROM heartrate_seconds
+ORDER BY RAND()
+LIMIT 10;
+
+-- STEP 8.2 - Check First Few Records
+SELECT * FROM heartrate_seconds
+ORDER BY Time ASC
+LIMIT 10;
+
+-- STEP 8.3 - Check Key Statistics for Data Integrity
+SELECT 
+    MIN(Time) AS earliest_time,
+    MAX(Time) AS latest_time,
+    COUNT(*) AS total_records,
+    COUNT(DISTINCT Id) AS unique_users
+FROM heartrate_seconds;
+
+-- STEP 8.4 - Check for Null Values in Key Columns
+SELECT 
+    COUNT(*) AS total_rows,
+    COUNT(Value) AS non_null_values
+FROM heartrate_seconds;
 
 
 
+-- STEP 9 - Create table for sleepDay_merged
+CREATE TABLE sleep_day (
+    Id BIGINT,
+    SleepDay DATETIME,
+    TotalSleepRecords INT,
+    TotalMinutesAsleep INT,
+    TotalTimeInBed INT
+);
+
+-- STEP 9.1 -  Import mport sleepDay_merged.csv (4.12.16 - 5.12.16)
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 4.12.16-5.12.16/sleepDay_merged.csv'
+INTO TABLE sleep_day
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Id, @SleepDay, TotalSleepRecords, TotalMinutesAsleep, TotalTimeInBed)
+SET SleepDay = STR_TO_DATE(@SleepDay, '%m/%d/%Y %r');
+
+-- STEP 9.1.1 - Filter Data: Ensure that all records fall within the observation time frame (BETWEEN '2016-03-12 00:00:00' AND '2016-05-12 23:59:59')
+DELETE FROM sleep_day
+WHERE SleepDay NOT BETWEEN '2016-04-12 00:00:00' AND '2016-05-12 23:59:59';
+
+-- STEP 10 - CLEANING
+-- STEP 10.1 - Finding and Removing duplicate records
+SELECT Id, SleepDay, COUNT(*)
+FROM sleep_day
+GROUP BY Id, SleepDay
+HAVING COUNT(*) > 1;
+
+-- Found 3 duplicates with same values. Delete Duplicates Using a Subquery with Row Numbers:
+-- Adding temporary unique id column
+ALTER TABLE sleep_day ADD COLUMN temp_id INT AUTO_INCREMENT PRIMARY KEY;
+-- Now Delete Duplicates Based on temp_id.
+DELETE FROM sleep_day
+WHERE temp_id NOT IN (
+    SELECT MIN(temp_id)
+    FROM (SELECT * FROM sleep_day) as subquery
+    GROUP BY Id, SleepDay
+    );
+
+-- Droping the temp_id column
+ALTER TABLE sleep_day DROP COLUMN temp_id;
+
+-- STEP 10.2 - Check for Null Values in Key Columns
+SELECT 
+    COUNT(*) AS total_rows,
+    COUNT(TotalSleepRecords) AS non_null_records,
+    COUNT(TotalMinutesAsleep) AS non_null_minutes_asleep,
+    COUNT(TotalTimeInBed) AS non_null_time_in_bed
+FROM sleep_day;
+
+-- STEP 11 - Integrity check
+-- STEP 11.1 - Check date range
+SELECT MIN(SleepDay) AS earliest_date, MAX(SleepDay) AS latest_date
+FROM sleep_day;
+
+-- STEP 11.2 - Verify Unique User Counts
+SELECT COUNT(DISTINCT Id) AS unique_users
+FROM sleep_day;
+
+-- STEP 11.3 - Check Key Statistics for Data Integrity
+SELECT 
+    MIN(TotalMinutesAsleep) AS min_minutes_asleep,
+    MAX(TotalMinutesAsleep) AS max_minutes_asleep,
+    AVG(TotalMinutesAsleep) AS avg_minutes_asleep,
+    MIN(TotalTimeInBed) AS min_time_in_bed,
+    MAX(TotalTimeInBed) AS max_time_in_bed,
+    AVG(TotalTimeInBed) AS avg_time_in_bed
+FROM sleep_day;
+
+
+
+
+
+-- STEP 12 - Create table for minuteSleep_merged
+CREATE TABLE minute_sleep (
+    Id BIGINT,
+    Date TIMESTAMP,
+    Value INT,
+    LogId BIGINT
+);
+
+-- STEP 12.1 -  Import minuteSleep_merged.csv (3.12.16 - 4.11.16)
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 3.12.16-4.11.16/minuteSleep_merged.csv'
+INTO TABLE minute_sleep
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Id, @Date, Value, LogId)
+SET Date = STR_TO_DATE(@Date, '%m/%d/%Y %h:%i:%s %p');
+
+
+
+-- STEP 12.1.1 - Filter Data: Ensure that all records fall within the observation time frame (2016-03-12 to 2016-04-11)
+DELETE FROM minute_sleep
+WHERE Date NOT BETWEEN '2016-03-12 00:00:00' AND '2016-04-11 23:59:59';
+
+-- STEP 12.2 -  Import minuteSleep_merged.csv (4.12.16 - 5.12.16)
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 4.12.16-5.12.16/minuteSleep_merged.csv'
+INTO TABLE minute_sleep
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Id, @Date, Value, LogId)
+SET Date = STR_TO_DATE(@Date, '%m/%d/%Y %h:%i:%s %p');
+
+
+-- STEP 12.2.1 - Remove Data Outside the Overall Time Frame for Second Import
+DELETE FROM minute_sleep
+WHERE Date NOT BETWEEN '2016-03-12 00:00:00' AND '2016-05-12 23:59:59';
+
+-- STEP 13 - CLEANING
+-- STEP 13.1 Split the Date Column into date and time
+-- Add New Columns for Date and Time
+ALTER TABLE minute_sleep 
+ADD COLUMN date_only DATE, 
+ADD COLUMN time_only TIME;
+
+-- Populate date_only and time_only
+UPDATE minute_sleep
+SET 
+    date_only = DATE(Date),
+    time_only = TIME(Date);
+
+-- Remove the Original Date Column
+ALTER TABLE minute_sleep DROP COLUMN Date;
+
+-- Verifying format for the data and time new columns
+SELECT Id, date_only, time_only, Value, LogId
+FROM minute_sleep
+ORDER BY RAND()
+LIMIT 10;
+
+
+
+-- STEP 13.1 - Check for Duplicates and Remove Them
+SELECT Id, date_only, time_only, Value LogId, COUNT(*) AS count
+FROM minute_sleep
+GROUP BY Id, date_only, time_only, Value, LogId
+HAVING COUNT(*) > 1;
+
+-- 1000 records found. Now to Select Duplicate Rows to Review Before Deletion
+SELECT *
+FROM minute_sleep
+WHERE (Id, date_only, time_only, Value, LogId) IN (
+    SELECT Id, date_only, time_only, Value, LogId
+    FROM minute_sleep
+    GROUP BY Id, date_only, time_only, Value, LogId
+    HAVING COUNT(*) > 1
+)
+ORDER BY Id, date_only, time_only, LogId;
+
+
+-- Remove Duplicates
+-- To differentiate rows with identical values, add a temporary auto_increment column. This will help in selectively deleting duplicates.
+ALTER TABLE minute_sleep ADD COLUMN temp_id INT AUTO_INCREMENT PRIMARY KEY;
+
+-- Then, create a temporary table that keeps only the first occurrence of each unique combination (Id, date_only, time_only, Value, LogId).
+CREATE TEMPORARY TABLE temp_minute_sleep AS
+SELECT MIN(temp_id) AS temp_id
+FROM minute_sleep
+GROUP BY Id, date_only, time_only, Value, LogId;
+
+-- Delete rows from minute_sleep where the temp_id is not in the temp_minute_sleep table:
+DELETE FROM minute_sleep
+WHERE temp_id NOT IN (
+    SELECT temp_id FROM temp_minute_sleep
+);
+
+-- Drop the temporary table and temp_id column
+DROP TEMPORARY TABLE temp_minute_sleep;
+
+ALTER TABLE minute_sleep DROP COLUMN temp_id;
+
+-- STEP 14 - Integrity check
+-- STEP 14.1 - Check for Null Values
+SELECT 
+    COUNT(*) AS total_rows,
+    COUNT(Id) AS non_null_id,
+    COUNT(date_only) AS non_null_date,
+    COUNT(time_only) AS non_null_time,
+    COUNT(Value) AS non_null_value,
+    COUNT(LogId) AS non_null_logid
+FROM minute_sleep;
+
+-- STEP 14.2 - Verify Date Range
+SELECT MIN(date_only) AS earliest_date, MAX(date_only) AS latest_date
+FROM minute_sleep;
+
+-- STEP 14.3 - Check Descriptive Statistics for Value
+SELECT 
+    MIN(Value) AS min_value,
+    MAX(Value) AS max_value,
+    AVG(Value) AS avg_value
+FROM minute_sleep;
+
+-- STEP 14.4 - Verify Unique User Counts
+SELECT COUNT(DISTINCT Id) AS unique_user_count
+FROM minute_sleep;
+
+-------------------------
+
+-- Step 1: Import hourlySteps_merged.csv and hourlyCalories_merged.csv
+-- Create Tables for Hourly Data
+CREATE TABLE hourly_steps (
+    Id BIGINT,
+    ActivityHour TIMESTAMP,
+    StepTotal INT
+);
+
+CREATE TABLE hourly_calories (
+    Id BIGINT,
+    ActivityHour TIMESTAMP,
+    Calories INT
+);
+
+-- Load hourlySteps_merged Data into Tables
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 3.12.16-4.11.16/hourlySteps_merged.csv'
+INTO TABLE hourly_steps
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Id, @ActivityHour, StepTotal)
+SET ActivityHour = STR_TO_DATE(@ActivityHour, '%m/%d/%Y %h:%i:%s %p');
+
+-- Filter Data Outside the Observation Time Frame
+DELETE FROM hourly_steps
+WHERE ActivityHour NOT BETWEEN '2016-03-12 00:00:00' AND '2016-04-11 23:59:59';
+
+-- Load the next hourlySteps_merged into the table
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 4.12.16-5.12.16/hourlySteps_merged.csv'
+INTO TABLE hourly_steps
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Id, @ActivityHour, StepTotal)
+SET ActivityHour = STR_TO_DATE(@ActivityHour, '%m/%d/%Y %h:%i:%s %p');
+
+-- Filter Data Outside the Observation Time Frame
+DELETE FROM hourly_steps
+WHERE ActivityHour NOT BETWEEN '2016-03-12 00:00:00' AND '2016-05-12 23:59:59';
+
+
+-- Load hourly_calories Data into Tables
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 3.12.16-4.11.16/hourlyCalories_merged.csv'
+INTO TABLE hourly_calories
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Id, @ActivityHour, Calories)
+SET ActivityHour = STR_TO_DATE(@ActivityHour, '%m/%d/%Y %h:%i:%s %p');
+
+-- Filter Data Outside the Observation Time Frame
+DELETE FROM hourly_calories
+WHERE ActivityHour NOT BETWEEN '2016-03-12 00:00:00' AND '2016-04-11 23:59:59';
+
+-- Load the next hourly_calories into the table
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Fitabase Data 4.12.16-5.12.16/hourlyCalories_merged.csv'
+INTO TABLE hourly_calories
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(Id, @ActivityHour, Calories)
+SET ActivityHour = STR_TO_DATE(@ActivityHour, '%m/%d/%Y %h:%i:%s %p');
+
+-- Filter Data Outside the Observation Time Frame
+DELETE FROM hourly_calories
+WHERE ActivityHour NOT BETWEEN '2016-03-12 00:00:00' AND '2016-05-12 23:59:59';
+
+-- Step 4: Verify Data Integrity
+-- Check for Null Values:
+
+SELECT
+    COUNT(*) AS total_rows,
+    COUNT(ActivityHour) AS non_null_activity_hour,
+    COUNT(StepTotal) AS non_null_steps
+FROM hourly_steps;
+
+SELECT
+    COUNT(*) AS total_rows,
+    COUNT(ActivityHour) AS non_null_activity_hour,
+    COUNT(Calories) AS non_null_calories
+FROM hourly_calories;
+
+
+-- Verify Date Range:
+SELECT
+    MIN(ActivityHour) AS earliest_date,
+    MAX(ActivityHour) AS latest_date
+FROM hourly_steps;
+
+SELECT
+    MIN(ActivityHour) AS earliest_date,
+    MAX(ActivityHour) AS latest_date
+FROM hourly_calories;
 
